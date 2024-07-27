@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      form {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+
+      input[type="email"],
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      input[type="button"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      input[type="button"]:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="addEmployeeForm">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="leaveType">Leave Type:</label>
+      <select id="leaveType" name="leaveType" required>
+        <option value="Annual Leave" selected>Annual Leave</option>
+        <option value="Sick Leave">Sick Leave</option>
+      </select>
+
+      <label for="totalLeave">Total Leave:</label>
+      <input type="number" id="totalLeave" name="totalLeave" required>
+
+      <input type="button" value="Submit" onclick="submitForm()">
+    </form>
+    <script>
+      function submitForm() {
+        var form = document.getElementById('addEmployeeForm');
+        var formData = {
+          email: form.email.value,
+          leaveType: form.leaveType.value,
+          totalLeave: form.totalLeave.value
+        };
+        google.script.run.withSuccessHandler(closeForm).addEmployeeData(formData);
+      }
+
+      function closeForm() {
+        google.script.host.close();
+      }
+    </script>
+  </body>
+</html>
